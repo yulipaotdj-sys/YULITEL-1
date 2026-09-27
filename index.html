@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yulitel</title>
+<meta name="theme-color" content="#0F2540">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Yulitel">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgcng9IjQwIiBmaWxsPSIjMEYyNTQwIi8+PHRleHQgeD0iMTAwIiB5PSIxMzgiIGZvbnQtc2l6ZT0iMTEyIiBmb250LWZhbWlseT0iQXJpYWwsIEhlbHZldGljYSwgc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI0U4ODIzQyIgdGV4dC1hbmNob3I9Im1pZGRsZSI+WTwvdGV4dD48L3N2Zz4=">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgcng9IjQwIiBmaWxsPSIjMEYyNTQwIi8+PHRleHQgeD0iMTAwIiB5PSIxMzgiIGZvbnQtc2l6ZT0iMTEyIiBmb250LWZhbWlseT0iQXJpYWwsIEhlbHZldGljYSwgc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI0U4ODIzQyIgdGV4dC1hbmNob3I9Im1pZGRsZSI+WTwvdGV4dD48L3N2Zz4=">
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjoiWXVsaXRlbCIsInNob3J0X25hbWUiOiJZdWxpdGVsIiwic3RhcnRfdXJsIjoiLiIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiNGNkY0RUYiLCJ0aGVtZV9jb2xvciI6IiMwRjI1NDAiLCJvcmllbnRhdGlvbiI6InBvcnRyYWl0IiwiaWNvbnMiOlt7InNyYyI6ImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjRiV3h1YzNROUltaDBkSEE2THk5M2QzY3Vkek11YjNKbkx6SXdNREF2YzNabklpQjJhV1YzUW05dklqMGdNQ0F3SURJd01DQXlNREFpUGp4eVpXTjBJSGRwWkhSb1BTSXlNREFpSUdobGFXZG9kRDBpTWpBd0lpQnllRDBpTkRBaUlHWnBiR3c5SWpBZ01GMDBEZ1UvUHo1OFpHVjBjejQ0TVRBd0lpQjVQU0l4TXpnaUlHWnZkbVZ5YzJsdmJqMGlNVEV5SWlCbWIyNTBMV1poYldsc2VUMGlRWEpwWVd3c0lFaGxiSFpsZEhScGJtY3NJSE5oYm5NdGMyVnlhV1pwWmowaU56QXdJaUJtYVc1MExYZGxhV2RvZEQwaUkwVTRPREl6UXlJZ2RHVjRkQzFoYm1ObDNyMzk4T0M5emRuUXVJVEUwSGpBaUlHOXlaR1Z5UFNKdGFXUmtiR1VpUHo0dGRHVWpQanhzTGxOMlp5PSIsInNpemVzIjoiNTEyeDUxMiIsInR5cGUiOiJpbWFnZS9zdmcreG1sIiwicHVycG9zZSI6ImFueSBtYXNrYWJsZSJ9XX0=
+<style>
+:root{
+  --navy:#0F2540; --navy2:#173A63; --amber:#E8823C; --bg:#F6F4EF; --card:#FFFFFF;
+  --ok:#2F855A; --warn:#C08A1E; --bad:#C0392B; --ink:#1B1F24; --line:#E4E0D6;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+header{position:sticky;top:0;padding:14px 16px calc(14px + env(safe-area-inset-top,0px));padding-top:calc(14px + env(safe-area-inset-top,0px));background:var(--navy);color:#fff;z-index:5}
+header h1{margin:0;font-size:20px;font-weight:700;letter-spacing:.2px}
+header p{margin:2px 0 0;font-size:12px;color:#B9C6D6}
+main{max-width:480px;margin:0 auto;padding:14px 12px 90px}
+.bar{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.bar select,.bar input{flex:1;min-width:110px;padding:9px 10px;border:1px solid var(--line);border-radius:8px;font-size:13px;background:#fff}
+.addbtn{width:100%;padding:11px;border:none;border-radius:9px;background:var(--amber);color:#fff;font-weight:600;font-size:14px;margin-bottom:12px}
+.addbtn:active{opacity:.85}
+.form{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:12px;display:none}
+.form.open{display:block}
+.form label{display:block;font-size:12px;color:#666;margin:8px 0 3px}
+.form input,.form select,.form textarea{width:100%;padding:8px 9px;border:1px solid var(--line);border-radius:7px;font-size:14px;font-family:inherit}
+.form .row{display:flex;gap:8px}.form .row>div{flex:1}
+.form .save{margin-top:12px;width:100%;padding:10px;border:none;border-radius:8px;background:var(--navy2);color:#fff;font-weight:600}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 13px;margin-bottom:9px}
+.card h3{margin:0 0 4px;font-size:15px}
+.card .meta{font-size:12.5px;color:#666;line-height:1.5}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;color:#fff;margin-left:6px}
+.g{background:var(--ok)}.a{background:var(--warn)}.r{background:var(--bad)}
+.del{float:right;color:#B0453F;font-size:12px;background:none;border:none;padding:2px}
+.empty{text-align:center;color:#8A8A8A;font-size:13px;padding:30px 10px}
+.evphoto{width:100%;border-radius:8px;margin-top:6px;display:block}
+nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
+nav button{flex:1;background:none;border:none;padding:10px 2px 9px;font-size:11px;color:#8A8A8A;font-weight:600}
+nav button.active{color:var(--navy2)}
+nav button div{font-size:18px;margin-bottom:1px}
+#login{max-width:320px;margin:22vh auto;padding:26px;background:#fff;border-radius:12px;border:1px solid var(--line);text-align:center}
+#login h2{margin:0 0 4px}
+#login p{color:#777;font-size:13px;margin:0 0 16px}
+#login input{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;margin-bottom:10px}
+#login button{width:100%;padding:11px;border:none;border-radius:8px;background:var(--navy);color:#fff;font-weight:700}
+#app{display:none}
+.hint{font-size:11.5px;color:#9a9;color:#8A8A8A;margin-top:-4px;margin-bottom:8px}
+.stepper{display:flex;gap:6px;margin-bottom:12px}
+.stepper button{flex:1;padding:9px 4px;border:none;background:#EDEAE1;font-size:11.5px;font-weight:700;color:#8A8A8A;border-radius:8px}
+.stepper button.active{color:#fff;background:var(--navy2)}
+.infocard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:12px}
+.infocard .row2{display:flex;padding:4px 0;font-size:13.5px;border-bottom:1px solid #F0EEE7}
+.infocard .row2:last-child{border-bottom:none}
+.infocard .row2 b{width:112px;flex-shrink:0;color:#555}
+.picker{border:2px dashed #A9C6E8;background:#F1F7FE;border-radius:10px;padding:22px 10px;text-align:center;margin-bottom:12px}
+.picker .picon{font-size:30px;margin-bottom:4px}
+.picker a{color:#2B6CB0;font-weight:700;font-size:13.5px;display:inline-block;margin:2px 8px;cursor:pointer}
+.thumbs{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:12px}
+.thumb{position:relative;width:74px;height:74px}
+.thumb img{width:100%;height:100%;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+.thumb button{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:#C0392B;color:#fff;border:none;font-size:12px;line-height:1;padding:0}
+.stepnav{display:flex;gap:8px;margin-top:4px}
+.stepnav button{flex:1;padding:11px;border:none;border-radius:8px;font-weight:700;font-size:14px}
+.stepnav .next{background:var(--navy2);color:#fff}
+.stepnav .back{background:#EEEAE0;color:#444}
+.sectitle{font-weight:700;font-size:13.5px;text-align:center;margin-bottom:10px;color:#444}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--bg:#12151A;--card:#1B1F26;--ink:#EDEDED;--line:#2A2F38}
+  body{background:var(--bg)}
+  nav{background:#1B1F26}
+  .form input,.form select,.form textarea,.bar select,.bar input{background:#12151A;color:#EDEDED}
+}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <h2>Yulitel</h2>
+  <p>Control de proyectos e informes de campo</p>
+  <input id="loginName" placeholder="Nombre del supervisor">
+  <button onclick="doLogin()">Ingresar</button>
+</div>
+
+<div id="app">
+<header><h1>Yulitel</h1><p id="who"></p></header>
+<main id="main"></main>
+<nav id="nav"></nav>
+</div>
+
+<script>
+let supervisor = localStorage.getItem('yt_sup') || '';
+const STORES=['proyectos','actividades','evidencias','hallazgos'];
+let idb=null;
+let cache={proyectos:[],actividades:[],evidencias:[],hallazgos:[]};
+
+function openIDB(){
+  return new Promise((resolve,reject)=>{
+    const req=indexedDB.open('yulitel_db',1);
+    req.onupgradeneeded=e=>{
+      const d=e.target.result;
+      STORES.forEach(s=>{ if(!d.objectStoreNames.contains(s)) d.createObjectStore(s,{keyPath:'id'}); });
+    };
+    req.onsuccess=e=>resolve(e.target.result);
+    req.onerror=e=>reject(e);
+  });
+}
+function idbGetAll(store){
+  return new Promise((resolve,reject)=>{
+    const tx=idb.transaction(store,'readonly');
+    const req=tx.objectStore(store).getAll();
+    req.onsuccess=()=>resolve(req.result);
+    req.onerror=e=>reject(e);
+  });
+}
+function idbPut(store,obj){
+  return new Promise((resolve,reject)=>{
+    const tx=idb.transaction(store,'readwrite');
+    tx.objectStore(store).put(obj);
+    tx.oncomplete=()=>resolve();
+    tx.onerror=e=>reject(e);
+  });
+}
+function idbDel(store,id){
+  return new Promise((resolve,reject)=>{
+    const tx=idb.transaction(store,'readwrite');
+    tx.objectStore(store).delete(id);
+    tx.oncomplete=()=>resolve();
+    tx.onerror=e=>reject(e);
+  });
+}
+async function refreshAll(){
+  for(const s of STORES){ cache[s]=await idbGetAll(s); }
+  render();
+}
+
+const tabs=[
+  {id:'home',label:'Inicio',icon:'🏠'},
+  {id:'proyectos',label:'Proyectos',icon:'📁'},
+  {id:'actividades',label:'Actividades',icon:'🗓️'},
+  {id:'evidencias',label:'Evidencias',icon:'📷'},
+  {id:'hallazgos',label:'Hallazgos',icon:'⚠️'}
+];
+let tab='home';
+
+function viewHome(){
+  const sec = (icon,title,items)=>`
+    <div class="infocard" style="margin-bottom:12px">
+      <div style="font-weight:700;font-size:14.5px;margin-bottom:6px">${icon} ${title}</div>
+      ${items.map(it=>`<div class="row2" style="cursor:pointer;justify-content:space-between" onclick="${it.action}">${it.label} <span style="color:#B7B2A4">›</span></div>`).join('')}
+    </div>`;
+  return `
+  ${sec('📁','Proyectos',[
+    {label:'Registrar proyecto',action:"goTab('proyectos',true)"},
+    {label:'Consultar proyectos',action:"goTab('proyectos',false)"}
+  ])}
+  ${sec('🗓️','Actividades',[
+    {label:'Registrar actividad',action:"goTab('actividades',true)"},
+    {label:'Consultar actividades',action:"goTab('actividades',false)"},
+    {label:'Revisar información',action:"goTab('actividades',false)"}
+  ])}
+  ${sec('📷','Evidencias',[
+    {label:'Cargar evidencia',action:"goTab('evidencias',true)"},
+    {label:'Registrar datos',action:"goTab('evidencias',true)"},
+    {label:'Consultar evidencias',action:"goTab('evidencias',false)"}
+  ])}
+  ${sec('⚠️','Hallazgos',[
+    {label:'Registrar hallazgo',action:"goTab('hallazgos',true)"},
+    {label:'Consultar hallazgos',action:"goTab('hallazgos',false)"},
+    {label:'Registrar hallazgo + evidencia en campo',action:"openCampoForm()"}
+  ])}
+  ${sec('🔎','Filtrar información',[
+    {label:'Filtrar actividades',action:"goTab('actividades',false)"},
+    {label:'Filtrar hallazgos',action:"goTab('hallazgos',false)"}
+  ])}
+  <button class="addbtn" style="background:#B0453F" onclick="cerrarSesion()">🚪 Cerrar sesión</button>
+  `;
+}
+function goTab(id,openForm){
+  tab=id; renderNav(); render();
+  if(openForm){
+    if(id==='evidencias') openEvForm();
+    else { const map={proyectos:'f-proy',actividades:'f-act',hallazgos:'f-hal'}; const el=document.getElementById(map[id]); if(el) el.classList.add('open'); }
+  }
+}
+function cerrarSesion(){
+  if(confirm('¿Cerrar sesión? Los datos guardados en este celular no se pierden.')){
+    localStorage.removeItem('yt_sup'); location.reload();
+  }
+}
+
+function doLogin(){
+  const n=document.getElementById('loginName').value.trim();
+  if(!n){alert('Escribe tu nombre');return;}
+  supervisor=n; localStorage.setItem('yt_sup',n);
+  startApp();
+}
+
+async function startApp(){
+  document.getElementById('login').style.display='none';
+  document.getElementById('app').style.display='block';
+  document.getElementById('who').textContent='Panel del Supervisor · '+supervisor;
+  try{
+    idb = await openIDB();
+    await refreshAll();
+    renderNav();
+  }catch(e){
+    document.getElementById('main').innerHTML='<div class="empty">Este navegador no permite guardar datos localmente. Prueba con Chrome o Safari actualizados, sin modo incógnito.</div>';
+  }
+}
+
+function renderNav(){
+  document.getElementById('nav').innerHTML = tabs.map(t=>
+    `<button class="${t.id===tab?'active':''}" onclick="switchTab('${t.id}')"><div>${t.icon}</div>${t.label}</button>`
+  ).join('');
+}
+function switchTab(id){ tab=id; renderNav(); render(); }
+
+function fmtDate(d){ if(!d) return ''; try{return new Date(d).toLocaleDateString('es-CO');}catch{return d;} }
+function semColor(s){ return s==='Verde'?'g':s==='Amarillo'?'a':'r'; }
+function newId(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,8); }
+
+function render(){
+  const m = document.getElementById('main');
+  if(tab==='home') m.innerHTML = viewHome();
+  else if(tab==='proyectos') m.innerHTML = viewProyectos();
+  else if(tab==='actividades') m.innerHTML = viewActividades();
+  else if(tab==='evidencias') m.innerHTML = viewEvidencias();
+  else m.innerHTML = viewHallazgos();
+}
+
+// ---------- PROYECTOS ----------
+function viewProyectos(){
+  const list = cache.proyectos.slice().sort((a,b)=>(a.codigo||'').localeCompare(b.codigo||''));
+  return `
+  <button class="addbtn" onclick="toggle('f-proy')">+ Nuevo proyecto</button>
+  <div class="form" id="f-proy">
+    <label>Código</label><input id="p-codigo">
+    <label>Nombre</label><input id="p-nombre">
+    <div class="row"><div><label>UIP</label><input id="p-uip"></div><div><label>Municipio</label><input id="p-mun"></div></div>
+    <div class="row"><div><label>Fecha inicio</label><input type="date" id="p-fi"></div><div><label>Fecha fin</label><input type="date" id="p-ff"></div></div>
+    <label>Días de atraso</label><input type="number" id="p-atraso" value="0">
+    <button class="save" onclick="saveProyecto()">Guardar proyecto</button>
+  </div>
+  ${list.length? list.map(p=>`
+    <div class="card">
+      <button class="del" onclick="delDoc('proyectos','${p.id}')">Eliminar</button>
+      <h3>${p.codigo} — ${p.nombre||''}<span class="pill ${p.atraso>0?'r':'g'}">${p.atraso>0?p.atraso+' d atraso':'A tiempo'}</span></h3>
+      <div class="meta">UIP: ${p.uip||'-'} · ${p.municipio||'-'}<br>${fmtDate(p.fi)} → ${fmtDate(p.ff)}</div>
+    </div>`).join('') : '<div class="empty">No hay proyectos registrados</div>'}
+  `;
+}
+async function saveProyecto(){
+  const codigo=v('p-codigo'); if(!codigo){alert('Falta el código');return;}
+  await idbPut('proyectos',{id:newId(),codigo, nombre:v('p-nombre'), uip:v('p-uip'), municipio:v('p-mun'),
+    fi:v('p-fi'), ff:v('p-ff'), atraso:parseInt(v('p-atraso')||'0'), creado: Date.now()});
+  toggle('f-proy'); clearForm('f-proy'); await refreshAll();
+}
+
+// ---------- ACTIVIDADES ----------
+function viewActividades(){
+  const opts = cache.proyectos.map(p=>`<option value="${p.codigo}">${p.codigo}</option>`).join('');
+  const list = cache.actividades.slice().sort((a,b)=>(b.fecha||'').localeCompare(a.fecha||''));
+  return `
+  <button class="addbtn" onclick="toggle('f-act')">+ Nueva actividad</button>
+  <div class="form" id="f-act">
+    <label>Proyecto</label><select id="a-proy"><option value="">Seleccionar...</option>${opts}</select>
+    <label>Actividad</label><input id="a-nombre">
+    <div class="row"><div><label>Fecha</label><input type="date" id="a-fecha"></div>
+    <div><label>Estado</label><select id="a-estado"><option>Pendiente</option><option>En proceso</option><option>Finalizada</option></select></div></div>
+    <button class="save" onclick="saveActividad()">Guardar actividad</button>
+  </div>
+  <div class="bar"><select id="filt-act-proy" onchange="render()"><option value="">Todos los proyectos</option>${opts}</select></div>
+  ${filtActividades(list).length? filtActividades(list).map(a=>`
+    <div class="card">
+      <button class="del" onclick="delDoc('actividades','${a.id}')">Eliminar</button>
+      <h3>${a.nombre}<span class="pill ${a.estado==='Finalizada'?'g':a.estado==='En proceso'?'a':'r'}">${a.estado}</span></h3>
+      <div class="meta">Proyecto ${a.proyecto} · ${fmtDate(a.fecha)}</div>
+      <button class="save" style="margin-top:8px" onclick="revisarActividad('${a.id}')">👁️ Revisar información</button>
+    </div>`).join('') : '<div class="empty">No hay actividades</div>'}
+  `;
+}
+function filtActividades(list){
+  const f=document.getElementById('filt-act-proy'); const val=f?f.value:'';
+  return val? list.filter(a=>a.proyecto===val) : list;
+}
+async function saveActividad(){
+  const proy=v('a-proy'); if(!proy){alert('Selecciona el proyecto');return;}
+  await idbPut('actividades',{id:newId(),proyecto:proy,nombre:v('a-nombre'),fecha:v('a-fecha'),estado:v('a-estado'),creado:Date.now()});
+  toggle('f-act'); clearForm('f-act'); await refreshAll();
+}
+
+
+// ---------- REVISAR INFORMACIÓN DE ACTIVIDAD (HU-10) ----------
+function revisarActividad(id){
+  const a = cache.actividades.find(x=>x.id===id);
+  if(!a){ alert('No se encontró la actividad'); return; }
+
+  const proyecto = cache.proyectos.find(p=>p.codigo===a.proyecto);
+  const evidencias = cache.evidencias.filter(e=>e.actividad===a.id);
+  const hallazgos = cache.hallazgos.filter(h=>h.proyecto===a.proyecto);
+
+  document.getElementById('main').innerHTML = `
+    <button class="addbtn" style="background:#EEEAE0;color:#444" onclick="render()">← Volver</button>
+    <div class="infocard">
+      <div class="sectitle">REVISIÓN DE INFORMACIÓN DE ACTIVIDAD</div>
+      <div class="row2"><b>Actividad:</b> ${a.nombre||'-'}</div>
+      <div class="row2"><b>Proyecto:</b> ${a.proyecto||'-'}</div>
+      <div class="row2"><b>Fecha:</b> ${fmtDate(a.fecha)||'-'}</div>
+      <div class="row2"><b>Estado:</b> ${a.estado||'-'}</div>
+      <div class="row2"><b>Supervisor:</b> ${supervisor||'-'}</div>
+    </div>
+
+    ${proyecto ? `
+    <div class="infocard">
+      <div class="sectitle">DATOS DEL PROYECTO</div>
+      <div class="row2"><b>Código:</b> ${proyecto.codigo||'-'}</div>
+      <div class="row2"><b>Nombre:</b> ${proyecto.nombre||'-'}</div>
+      <div class="row2"><b>UIP:</b> ${proyecto.uip||'-'}</div>
+      <div class="row2"><b>Municipio:</b> ${proyecto.municipio||'-'}</div>
+      <div class="row2"><b>Inicio:</b> ${fmtDate(proyecto.fi)||'-'}</div>
+      <div class="row2"><b>Fin:</b> ${fmtDate(proyecto.ff)||'-'}</div>
+      <div class="row2"><b>Atraso:</b> ${proyecto.atraso||0} día(s)</div>
+    </div>` : ''}
+
+    <div class="infocard">
+      <div class="sectitle">EVIDENCIAS</div>
+      ${evidencias.length ? evidencias.map(e=>`
+        <div class="row2"><b>Fecha:</b> ${new Date(e.creado).toLocaleString('es-CO')}</div>
+        <div class="row2"><b>Comentarios:</b> ${e.desc||'—'}</div>
+        ${e.fotos?.length ? `<div class="thumbs" style="margin-top:8px">${e.fotos.map(f=>`<div class="thumb"><img src="${f}"></div>`).join('')}</div>` : ''}
+      `).join('<hr>') : '<div class="empty">No hay evidencias para esta actividad</div>'}
+    </div>
+
+    <div class="infocard">
+      <div class="sectitle">HALLAZGOS DEL PROYECTO</div>
+      ${hallazgos.length ? hallazgos.map(h=>`
+        <div class="card">
+          <h3>${h.tipo||'Hallazgo'} <span class="pill ${semColor(h.semaforo)}">${h.semaforo}</span></h3>
+          <div class="meta">Severidad: ${h.sev||'-'} · ${h.sub||''}<br>${h.desc||''}</div>
+          ${h.foto?`<img class="evphoto" src="${h.foto}">`:''}
+        </div>`).join('') : '<div class="empty">No hay hallazgos para este proyecto</div>'}
+    </div>
+  `;
+}
+
+// ---------- EVIDENCIAS ----------
+let evState={open:false,step:1,actividad:'',fotos:[],desc:''};
+let pendingGeo=null;
+
+function viewEvidencias(){
+  const list = cache.evidencias.slice().sort((a,b)=>b.creado-a.creado);
+  const listHtml = list.length? list.map(e=>{
+    const act = cache.actividades.find(a=>a.id===e.actividad);
+    const fotos = e.fotos || (e.foto?[e.foto]:[]);
+    return `<div class="card">
+      <button class="del" onclick="delDoc('evidencias','${e.id}')">Eliminar</button>
+      <h3>${act?act.proyecto+' — '+act.nombre:'(actividad eliminada)'}</h3>
+      <div class="meta">
+        Fecha/hora: ${new Date(e.creado).toLocaleString('es-CO')} · Registrado por: ${e.registradoPor||supervisor}<br>
+        ${e.latitude!=null&&e.longitude!=null?`GPS: ${Number(e.latitude).toFixed(5)}, ${Number(e.longitude).toFixed(5)} · `:''}
+        ${e.desc||''}
+      </div>
+      ${fotos.length?`<div class="thumbs" style="margin-top:8px">${fotos.map(f=>`<div class="thumb"><img src="${f}"></div>`).join('')}</div>`:''}
+    </div>`;
+  }).join('') : '<div class="empty">No hay evidencias cargadas</div>';
+
+  if(!evState.open) return `<button class="addbtn" onclick="openEvForm()">+ Cargar evidencia</button>${listHtml}`;
+
+  const opts = cache.actividades.map(a=>`<option value="${a.id}" ${a.id===evState.actividad?'selected':''}>${a.proyecto} — ${a.nombre}</option>`).join('');
+  const act = cache.actividades.find(a=>a.id===evState.actividad);
+
+  let stepHtml='';
+  if(evState.step===1){
+    stepHtml = `
+      <label>Actividad</label><select id="e-act" onchange="evState.actividad=this.value;render()"><option value="">Seleccionar...</option>${opts}</select>
+      ${act?`<div class="infocard" style="margin-top:10px">
+        <div class="row2"><b>Actividad:</b> ${act.nombre}</div>
+        <div class="row2"><b>Proyecto:</b> ${act.proyecto}</div>
+        <div class="row2"><b>Fecha:</b> ${fmtDate(act.fecha)}</div>
+        <div class="row2"><b>Estado:</b> ${act.estado}</div>
+      </div>`:''}
+      <div class="stepnav"><button class="next" ${act?'':'disabled'} onclick="evGoStep(2)">Siguiente</button></div>`;
+  } else if(evState.step===2){
+    stepHtml = `
+      <div class="picker">
+        <div class="picon">📷</div>
+        <div><a onclick="document.getElementById('e-cam').click()">Tomar foto</a> o <a onclick="document.getElementById('e-gal').click()">Seleccionar de galería</a></div>
+      </div>
+      <input type="file" accept="image/*" capture="environment" id="e-cam" style="display:none" onchange="addEvPhoto(this.files)">
+      <input type="file" accept="image/*" multiple id="e-gal" style="display:none" onchange="addEvPhoto(this.files)">
+      ${evState.fotos.length?`<div class="sectitle">Fotos agregadas</div><div class="thumbs">${evState.fotos.map((f,i)=>`<div class="thumb"><img src="${f}"><button onclick="evState.fotos.splice(${i},1);render()">×</button></div>`).join('')}</div>`:''}
+      <label>Comentarios (Opcional)</label><textarea id="e-desc" rows="2" oninput="evState.desc=this.value">${evState.desc}</textarea>
+      <div class="stepnav"><button class="back" onclick="evGoStep(1)">Atrás</button><button class="next" onclick="evGoStep(3)">Siguiente</button></div>`;
+  } else {
+    stepHtml = `
+      <div class="infocard">
+        <div class="row2"><b>Actividad:</b> ${act?act.nombre:''}</div>
+        <div class="row2"><b>Proyecto:</b> ${act?act.proyecto:''}</div>
+        <div class="row2"><b>Fotos:</b> ${evState.fotos.length}</div>
+        <div class="row2"><b>Comentarios:</b> ${evState.desc||'—'}</div>
+      </div>
+      ${evState.fotos.length?`<div class="thumbs">${evState.fotos.map(f=>`<div class="thumb"><img src="${f}"></div>`).join('')}</div>`:''}
+      <div class="stepnav"><button class="back" onclick="evGoStep(2)">Atrás</button><button class="next" onclick="saveEvidencia()">Guardar evidencia</button></div>`;
+  }
+
+  return `
+  <div class="stepper">
+    <button class="${evState.step===1?'active':''}" onclick="evGoStep(1)">1.Información</button>
+    <button class="${evState.step===2?'active':''}" onclick="${evState.actividad?'evGoStep(2)':''}">2.Evidencia</button>
+    <button class="${evState.step===3?'active':''}">3.Revisar</button>
+  </div>
+  <div class="form open">${stepHtml}</div>
+  `;
+}
+function openEvForm(){ evState={open:true,step:1,actividad:'',fotos:[],desc:''}; render(); }
+function evGoStep(n){ if(n===2 && !evState.actividad){return;} evState.step=n; render(); }
+function addEvPhoto(files){
+  if(!files||!files.length) return;
+  navigator.geolocation && navigator.geolocation.getCurrentPosition(pos=>{
+    pendingGeo=pos.coords; Array.from(files).forEach(overlayAndPush);
+  }, ()=>{ pendingGeo=null; Array.from(files).forEach(overlayAndPush); }, {timeout:5000});
+  setTimeout(()=>{ if(pendingGeo===null) Array.from(files).forEach(overlayAndPush); },5500);
+}
+let overlaidOnce=new WeakSet();
+function overlayAndPush(file){
+  if(overlaidOnce.has(file)) return; overlaidOnce.add(file);
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    const img=new Image();
+    img.onload=()=>{
+      const cv=document.createElement('canvas');
+      cv.width=img.width; cv.height=img.height;
+      const ctx=cv.getContext('2d'); ctx.drawImage(img,0,0);
+      const barH=Math.max(60,img.height*0.09);
+      ctx.fillStyle='rgba(15,37,64,0.72)'; ctx.fillRect(0,img.height-barH,img.width,barH);
+      ctx.fillStyle='#fff'; ctx.font=Math.round(barH*0.28)+'px sans-serif';
+      const geo = pendingGeo? `Lat ${pendingGeo.latitude.toFixed(5)}, Lon ${pendingGeo.longitude.toFixed(5)}` : 'Ubicación no disponible';
+      ctx.fillText(new Date().toLocaleString('es-CO'), 12, img.height-barH+barH*0.42);
+      ctx.fillText(geo, 12, img.height-barH+barH*0.72);
+      ctx.fillText('Registrado por: '+supervisor, img.width*0.55, img.height-barH+barH*0.58);
+      evState.fotos.push(cv.toDataURL('image/jpeg',0.75));
+      render();
+    };
+    img.src=ev.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+async function saveEvidencia(){
+  if(!evState.actividad||!evState.fotos.length){alert('Falta actividad o fotos');return;}
+  await idbPut('evidencias',{
+    id:newId(),
+    actividad:evState.actividad,
+    desc:evState.desc,
+    fotos:evState.fotos,
+    creado:Date.now(),
+    registradoPor:supervisor,
+    latitude:pendingGeo?.latitude||null,
+    longitude:pendingGeo?.longitude||null
+  });
+  evState={open:false,step:1,actividad:'',fotos:[],desc:''};
+  await refreshAll();
+}
+
+// ---------- HALLAZGOS ----------
+function viewHallazgos(){
+  const opts = cache.proyectos.map(p=>`<option value="${p.codigo}">${p.codigo}</option>`).join('');
+  const list = cache.hallazgos.slice().sort((a,b)=>b.creado-a.creado);
+  return `
+  <button class="addbtn" onclick="toggle('f-hal')">+ Registrar hallazgo</button>
+  <button class="addbtn" style="background:#173A63" onclick="openCampoForm()">📷 Registrar hallazgo + evidencia en campo</button>
+  <div class="form" id="f-hal">
+    <label>Proyecto</label><select id="h-proy"><option value="">Seleccionar...</option>${opts}</select>
+    <div class="row"><div><label>Severidad</label><select id="h-sev"><option>Alta</option><option>Media</option><option>Baja</option></select></div>
+    <div><label>Estado</label><select id="h-sem"><option>Rojo</option><option>Amarillo</option><option>Verde</option></select></div></div>
+    <label>Tipificación</label><input id="h-tipo">
+    <label>Sub-estado</label><input id="h-sub">
+    <label>Descripción</label><textarea id="h-desc" rows="2"></textarea>
+    <label>Foto de campo (opcional)</label>
+    <input type="file" accept="image/*" capture="environment" id="h-file" onchange="prepPhotoH()">
+    <canvas id="h-canvas" style="display:none;width:100%;border-radius:8px;margin-top:6px"></canvas>
+    <button class="save" onclick="saveHallazgo()">Guardar hallazgo</button>
+  </div>
+
+  <div class="form" id="f-campo">
+    <div class="sectitle">REGISTRAR HALLAZGO Y EVIDENCIA EN CAMPO</div>
+    <label>Proyecto</label>
+    <select id="c-proy"><option value="">Seleccionar...</option>${opts}</select>
+    <label>Actividad (opcional)</label>
+    <select id="c-act"><option value="">Sin actividad</option>${cache.actividades.map(a=>`<option value="${a.id}">${a.proyecto} — ${a.nombre}</option>`).join('')}</select>
+    <div class="row">
+      <div><label>Severidad</label><select id="c-sev"><option>Alta</option><option>Media</option><option>Baja</option></select></div>
+      <div><label>Estado</label><select id="c-sem"><option>Rojo</option><option>Amarillo</option><option>Verde</option></select></div>
+    </div>
+    <label>Tipificación</label><input id="c-tipo">
+    <label>Descripción del hallazgo</label><textarea id="c-desc" rows="3"></textarea>
+    <label>Evidencia fotográfica</label>
+    <input type="file" accept="image/*" capture="environment" id="c-file" onchange="prepPhotoCampo()">
+    <canvas id="c-canvas" style="display:none;width:100%;border-radius:8px;margin-top:8px"></canvas>
+    <div class="hint">La ubicación GPS se intenta obtener al registrar el hallazgo.</div>
+    <button class="save" onclick="saveCampo()">Guardar hallazgo y evidencia</button>
+  </div>
+
+  <div class="bar">
+    <select id="filt-hal-proy" onchange="render()"><option value="">Todos los proyectos</option>${opts}</select>
+    <select id="filt-hal-sem" onchange="render()"><option value="">Todos los estados</option><option>Rojo</option><option>Amarillo</option><option>Verde</option></select>
+  </div>
+  ${filtHallazgos(list).length? filtHallazgos(list).map(h=>`
+    <div class="card">
+      <button class="del" onclick="delDoc('hallazgos','${h.id}')">Eliminar</button>
+      <h3>${h.proyecto} — ${h.tipo||'Hallazgo'}<span class="pill ${semColor(h.semaforo)}">${h.semaforo}</span></h3>
+      <div class="meta">Severidad: ${h.sev} · ${h.sub||''}<br>${h.desc||''}</div>
+      ${h.foto?`<img class="evphoto" src="${h.foto}">`:''}
+    </div>`).join('') : '<div class="empty">No hay hallazgos registrados</div>'}
+  `;
+}
+function filtHallazgos(list){
+  const p=document.getElementById('filt-hal-proy'); const s=document.getElementById('filt-hal-sem');
+  let r=list;
+  if(p&&p.value) r=r.filter(h=>h.proyecto===p.value);
+  if(s&&s.value) r=r.filter(h=>h.semaforo===s.value);
+  return r;
+}
+function prepPhotoH(){
+  const file=document.getElementById('h-file').files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    const img=new Image();
+    img.onload=()=>{
+      const cv=document.getElementById('h-canvas');
+      cv.width=img.width; cv.height=img.height;
+      const ctx=cv.getContext('2d'); ctx.drawImage(img,0,0);
+      const barH=Math.max(50,img.height*0.08);
+      ctx.fillStyle='rgba(15,37,64,0.72)'; ctx.fillRect(0,img.height-barH,img.width,barH);
+      ctx.fillStyle='#fff'; ctx.font=Math.round(barH*0.3)+'px sans-serif';
+      ctx.fillText(new Date().toLocaleString('es-CO')+' — '+supervisor, 10, img.height-barH*0.4);
+      cv.style.display='block';
+    };
+    img.src=ev.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+async function saveHallazgo(){
+  const proy=v('h-proy'); if(!proy){alert('Selecciona el proyecto');return;}
+  const cv=document.getElementById('h-canvas');
+  const fotoUrl = cv.style.display!=='none' ? cv.toDataURL('image/jpeg',0.75) : '';
+  await idbPut('hallazgos',{id:newId(),proyecto:proy, sev:v('h-sev'), semaforo:v('h-sem'), tipo:v('h-tipo'), sub:v('h-sub'), desc:v('h-desc'),
+    foto:fotoUrl, creado:Date.now()});
+  toggle('f-hal'); clearForm('f-hal'); cv.style.display='none';
+  await refreshAll();
+}
+
+
+// ---------- HU-13: HALLAZGO + EVIDENCIA EN CAMPO ----------
+let campoGeo=null;
+
+function openCampoForm(){
+  tab='hallazgos';
+  renderNav();
+  render();
+  setTimeout(()=>{
+    const el=document.getElementById('f-campo');
+    if(el) el.classList.add('open');
+  },0);
+}
+
+function prepPhotoCampo(){
+  const file=document.getElementById('c-file')?.files[0];
+  if(!file) return;
+
+  const finish=(coords)=>{
+    campoGeo=coords||null;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      const img=new Image();
+      img.onload=()=>{
+        const cv=document.getElementById('c-canvas');
+        cv.width=img.width; cv.height=img.height;
+        const ctx=cv.getContext('2d');
+        ctx.drawImage(img,0,0);
+        const barH=Math.max(55,img.height*0.09);
+        ctx.fillStyle='rgba(15,37,64,0.72)';
+        ctx.fillRect(0,img.height-barH,img.width,barH);
+        ctx.fillStyle='#fff';
+        ctx.font=Math.round(barH*0.28)+'px sans-serif';
+        const geo=campoGeo
+          ? `Lat ${campoGeo.latitude.toFixed(5)}, Lon ${campoGeo.longitude.toFixed(5)}`
+          : 'Ubicación no disponible';
+        ctx.fillText(new Date().toLocaleString('es-CO'),10,img.height-barH+barH*0.36);
+        ctx.fillText(geo,10,img.height-barH+barH*0.68);
+        ctx.fillText('Registrado por: '+supervisor,img.width*0.52,img.height-barH+barH*0.52);
+        cv.style.display='block';
+      };
+      img.src=ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
+
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(
+      pos=>finish(pos.coords),
+      ()=>finish(null),
+      {enableHighAccuracy:true,timeout:7000}
+    );
+  } else finish(null);
+}
+
+async function saveCampo(){
+  const proy=v('c-proy');
+  if(!proy){alert('Selecciona el proyecto');return;}
+
+  const actividad=v('c-act');
+  const cv=document.getElementById('c-canvas');
+  const foto=cv && cv.style.display!=='none'
+    ? cv.toDataURL('image/jpeg',0.75)
+    : '';
+
+  const now=Date.now();
+
+  const hallazgoId=newId();
+  await idbPut('hallazgos',{
+    id:hallazgoId,
+    proyecto:proy,
+    actividad:actividad,
+    sev:v('c-sev'),
+    semaforo:v('c-sem'),
+    tipo:v('c-tipo'),
+    sub:'',
+    desc:v('c-desc'),
+    foto:foto,
+    latitude:campoGeo?.latitude||null,
+    longitude:campoGeo?.longitude||null,
+    creado:now,
+    registradoPor:supervisor,
+    origen:'campo'
+  });
+
+  if(actividad && foto){
+    await idbPut('evidencias',{
+      id:newId(),
+      actividad:actividad,
+      desc:'Evidencia asociada al hallazgo registrado en campo.',
+      fotos:[foto],
+      latitude:campoGeo?.latitude||null,
+      longitude:campoGeo?.longitude||null,
+      creado:now,
+      registradoPor:supervisor,
+      hallazgoId:hallazgoId,
+      origen:'campo'
+    });
+  }
+
+  alert('Hallazgo y evidencia registrados correctamente.');
+  await refreshAll();
+}
+
+// ---------- helpers ----------
+function v(id){ const el=document.getElementById(id); return el?el.value.trim():''; }
+function toggle(id){ document.getElementById(id).classList.toggle('open'); }
+function clearForm(id){
+  const form=document.getElementById(id);
+  if(!form) return;
+  form.querySelectorAll('input,textarea').forEach(i=>i.value='');
+  form.querySelectorAll('select').forEach(s=>s.selectedIndex=0);
+}
+async function delDoc(store,id){ if(confirm('¿Eliminar este registro?')){ await idbDel(store,id); await refreshAll(); } }
+
+if(supervisor) startApp();
+</script>
+</body>
+</html>
